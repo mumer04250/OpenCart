@@ -17,7 +17,7 @@ export class userLogin{
         await this.txtLoginName.fill(testdata.username)
         await this.txtLoginPassword.fill(testdata.password)
         await this.btnSubmit.click()
-        expect(1).toBe(2)
+        
 
         //console.log('Buton click')
         // await this.page.pause()
