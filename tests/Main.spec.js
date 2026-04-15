@@ -3,9 +3,13 @@ import { userSignup } from '../Pages/Signup Navigation'
 import { CreateUser } from '../Pages/CreateUser'
 import { testdata } from '../Utils/UserRegisterData'
 import { userLogin } from '../Pages/Login'
+import { VerifyHome } from '../Pages/VerifyHomePage'
+import { AddtoCartFun } from '../Pages/AddtoCart'
 let signupObj
 let createUserObj
 let userLoginObj
+let verifyHomeobj
+let addtoCartobj
 test.beforeEach(async({page})=>{
     await page.goto('https://demo.abantecart.com/')
 })
@@ -37,5 +41,26 @@ test ('User Login',async({page})=>{
     await userLoginObj.Login()
     //await expect(page).toHaveURL(/login/)
     await expect(page).toHaveURL(/account/)
+
+})
+test ('Verify Home Page',async({page})=>{
+    userLoginObj=new userLogin(page)
+    await userLoginObj.Login()
+    await expect(page).toHaveURL(/account/)
+    verifyHomeobj=new VerifyHome(page)
+    await verifyHomeobj.accVerify()
+    await verifyHomeobj.navigationCheck()
+    await verifyHomeobj.CategoryCheck()
+
+
+})
+test ('Category Select',async({page})=>{
+     userLoginObj=new userLogin(page)
+    await userLoginObj.Login()
+    await expect(page).toHaveURL(/account/)
+    verifyHomeobj=new VerifyHome(page)
+    await verifyHomeobj.accVerify()
+    addtoCartobj=new AddtoCartFun(page)
+    await addtoCartobj.catSelect()
 
 })
